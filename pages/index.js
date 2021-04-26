@@ -20,6 +20,7 @@ export default function Home() {
             styles={
                 css`
                      body, #__next, #__next div {
+                       height: 100vh;
                        min-height: 100vh;
                        min-height: -webkit-fill-available;
                      }
