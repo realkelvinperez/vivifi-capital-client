@@ -25,9 +25,12 @@ export default function Home() {
     }, [])
 
 	const handleClick = async () => {
-        const accounts = await window.ethereum.send('eth_requestAccounts')
-        setAccounts(accounts)
-        setAddress(accounts.result[0])
+        if(window.ethereum){
+            const accounts = await window.ethereum.send('eth_requestAccounts')
+            setAccounts(accounts)
+            setAddress(accounts.result[0])
+        }
+        else alert('No Ethereum Provider')
 	}
 
   return (
@@ -57,7 +60,7 @@ export default function Home() {
               <Heading as="h3" size="sm">Dashboard</Heading>
 
               <Button marginY={4} onClick={handleClick}>
-                  Connect Wallet
+                  {!address ? 'Connect Wallet' : 'Wallet Connected'}
               </Button>
 
               <Heading as="h3" size="sm">Account Address</Heading>
