@@ -17,6 +17,12 @@ export default function Home() {
     const [accounts, setAccounts] = useState('')
 
     useEffect(() => {
+        // if(window?.trustwallet && window?.ethereum?.isTrust){
+        if(window?.ethereum?.isTrust){
+            alert('isTrust True')
+            window.web3 = new Web3(window.ethereum)
+            return true
+        }
         if (window.ethereum){
             window.web3 = new Web3(window.ethereum)
             return true
@@ -39,7 +45,6 @@ export default function Home() {
             styles={
                 css`
                      body, #__next, #__next div {
-                       height: 100%;
                        min-height: 100vh;
                        min-height: -webkit-fill-available;
                      }
