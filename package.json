@@ -14,6 +14,8 @@
     "framer-motion": "^4",
     "next": "10.1.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "web3": "^1.3.5",
+    "web3modal": "^1.9.3"
   }
 }

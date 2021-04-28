@@ -1,7 +1,11 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { Global, css } from "@emotion/react";
+import Web3 from "web3";
+// import Web3Modal from "web3modal"
 
 import {
+    Box,
     Button,
     Container,
     Flex,
@@ -9,9 +13,21 @@ import {
 } from "@chakra-ui/react";
 
 export default function Home() {
+    const [address, setAddress] = useState('')
+    const [accounts, setAccounts] = useState('')
 
-	const handleClick = () => {
-		console.log({msg: 'Button Clicked'})
+    useEffect(() => {
+        if (window.ethereum){
+            window.web3 = new Web3(window.ethereum)
+            return true
+        }
+        return false
+    }, [])
+
+	const handleClick = async () => {
+        const accounts = await window.ethereum.send('eth_requestAccounts')
+        setAccounts(accounts)
+        setAddress(accounts.result[0])
 	}
 
   return (
@@ -20,7 +36,7 @@ export default function Home() {
             styles={
                 css`
                      body, #__next, #__next div {
-                       height: 100vh;
+                       height: 100%;
                        min-height: 100vh;
                        min-height: -webkit-fill-available;
                      }
@@ -43,6 +59,9 @@ export default function Home() {
               <Button marginY={4} onClick={handleClick}>
                   Connect Wallet
               </Button>
+
+              <Heading as="h3" size="sm">Account Address</Heading>
+              <Box>{address}</Box>
           </Flex>
       </Container>
     </div>
